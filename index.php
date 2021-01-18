@@ -17,7 +17,11 @@
             <h3>Followed groups</h3>
             </div>
             <div class="main">
+<<<<<<< HEAD
             dsadsad
+=======
+            
+>>>>>>> bfff38742c67cb270c8d2895e89c4792401e8561
             </div>
         </div>
     </body>
