@@ -17,7 +17,7 @@
             <h3>Followed groups</h3>
             </div>
             <div class="main">
-            test
+            dsadsad
             </div>
         </div>
     </body>
