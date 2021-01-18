@@ -1,0 +1,46 @@
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: #65c80b;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+} 
+.navbar a.right {
+    float: right;
+}
+
+.navbar a:hover {
+    background-color: orange;
+    color: black;
+}
+.page{
+    display: -ms-flexbox; 
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.left {
+    -ms-flex: 15%;
+    flex: 15%;
+    padding: 20px;
+}
+  
+.main {   
+    -ms-flex: 85%; 
+    flex: 85%;
+    padding: 20px;
+    
+}
