@@ -45,11 +45,12 @@ function register($nume,$prenume,$email,$password,$conpassword,$conn){
     }
 
     if($error==false){
-        $options = ['cost' => 12];
-        $sql="INSERT INTO users(nume,prenume,email,password) 
-        VALUES(:nume,:prenume,:email,:password)";
+        $sql="INSERT INTO users(nume,prenume,email,password,salt) 
+        VALUES(:nume,:prenume,:email,:password,:salt)";
         $stmt = mysqli_stmt_init($conn);
 
+        $hashpsw=$password;
+        $randomsalt=hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
         if(!mysqli_stmt_prepare($stmt,$sql)){
             //alta eroare 
             exit();
@@ -58,7 +59,8 @@ function register($nume,$prenume,$email,$password,$conpassword,$conn){
         $stmt->bind_param(':nume',$nume);
         $stmt->bind_param(':prenume',$prenum,);
         $stmt->bind_param(':email',$email);
-        $stmt->bind_param(':password',password_hash($password,PASSWORD_DEFAULT,$options));
+        $stmt->bind_param(':password',$hashpsw);
+        $stmt->bind_param(':salt',$randomsalt);
         $stmt->execute();
         $stmt->close();
     }
