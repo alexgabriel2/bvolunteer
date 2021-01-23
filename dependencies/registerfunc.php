@@ -49,8 +49,8 @@ function register($nume,$prenume,$email,$password,$conpassword,$conn){
         VALUES(:nume,:prenume,:email,:password,:salt)";
         $stmt = mysqli_stmt_init($conn);
 
-        $hashpsw=$password;
         $randomsalt=hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+        $hashpsw=hash('sha512',$password.$randomsalt);
         if(!mysqli_stmt_prepare($stmt,$sql)){
             //alta eroare 
             exit();
