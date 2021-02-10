@@ -28,7 +28,7 @@ function validpassword($password) {
     }
 }
 function emailexist($conn, $email){
-    $sqlusers="SELECT * FROM users WHERE email=?;";
+    $sqlusers="SELECT email FROM users WHERE email=?;";
     #$sqlorg ="SELECT * FROM org WHERE email=?;";
     $stmt=mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt,$sqlusers);
@@ -51,18 +51,20 @@ function register($conn, $nume, $prenume, $email, $password){
 
     $verified=0;
     $key=$nume.time().$prenume;
+
     $ip = $_SERVER['REMOTE_ADDR'];
+    
     $options = [
         'cost' => 12,
     ];
     $verifykey=hash('sha256',$key);
     $hashedpsw=password_hash($password,PASSWORD_BCRYPT, $options);
-    mysqli_stmt_bind_param($stmt, "sssssss", $nume, $prenume, $email, $hashedpsw, $verified, $verifykey,$ip);
+    mysqli_stmt_bind_param($stmt, "sssssss", $nume, $prenume, $email, $hashedpsw, $verified, $verifykey, $ip);
     mysqli_stmt_execute($stmt);
-
+    $usr="volutar";
     $to=$email;
     $subject ="Email Verification";
-    $message ="<a href='http://localhost/bvolunteer/account/verify.php?verifykey=$verifykey'>Verify your account</a>";
+    $message ="<a href='http://localhost/bvolunteer/account/verify.php?verifykey=$verifykey&is=$usr'>Verify your account</a>";
     $header = "From: cloudgreen2020@gmail.com \r\n";
     $header .= "MIME-Version: 1.0"."\r\n";
     $header .= "Content-type:text/html;charset=UTF-8"."\r\n";

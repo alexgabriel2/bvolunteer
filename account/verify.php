@@ -1,7 +1,37 @@
 <?php
+require_once '../dependencies/db_connect.php';
 
-require_once 'db_connect.php';
+if(isset($_GET['verifykey']) && isset($_GET['is'])){
 
-if(isset($_GET['verifykey'])){
     $verkey=mysqli_real_escape_string($conn,trim($_GET['verifykey']));
+
+    $user=mysqli_real_escape_string($conn,trim($_GET['is']));
+
+    if($user=="volutar"){
+
+        $sqlusers="SELECT * FROM users WHERE verified=? AND regkey=?;";
+        $stmt=mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt,$sqlusers);
+        $verified=0;
+        mysqli_stmt_bind_param($stmt,"ss", $verified, $verkey);
+        mysqli_stmt_execute($stmt);
+        $resultuser=mysqli_stmt_get_result($stmt);
+        if(mysqli_fetch_assoc($resultuser)){
+            $update=$conn->query("UPDATE USERS SET verified = 1 WHERE regkey='$verkey' LIMIT 1");
+            if($update){
+                echo "Your account has been verified";
+            }
+            else{
+                echo"Something went wrong";
+            }
+        }
+        else{
+            echo"This account is invalid or is already verified";
+        }
+
+    }
+    else{
+        echo"Something went wrong";
+    }
+    mysqli_stmt_close($stmt);
 }
