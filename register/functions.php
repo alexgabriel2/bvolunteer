@@ -7,6 +7,7 @@ function validprenume($prenume){
     return preg_match("/[^a-zA-Z]+/", $prenume);
 }    
 function validpassword($password) {
+  
     if(strlen($password)<=7){
         return "1";
     }
@@ -30,10 +31,8 @@ function emailexist($conn, $email){
     $sqlusers="SELECT * FROM users WHERE email=?;";
     #$sqlorg ="SELECT * FROM org WHERE email=?;";
     $stmt=mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt,$sqlusers)){
-        return "1";
-        #ceva eroare
-    }
+    mysqli_stmt_prepare($stmt,$sqlusers);
+
     mysqli_stmt_bind_param($stmt,"s",$email);
     mysqli_stmt_execute($stmt);
     $resultuser=mysqli_stmt_get_result($stmt);
@@ -45,20 +44,29 @@ function emailexist($conn, $email){
 }
 function register($conn, $nume, $prenume, $email, $password){
 
-    $sql = "INSERT INTO users (nume, prenume, email, password, verified, regkey)
-     VALUE (?, ?, ?, ?, ?, ?);";
+    $sql = "INSERT INTO users (nume, prenume, email, password, verified, regkey, ipreg)
+     VALUE (?, ?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
-    $salt=0;
+
     $verified=0;
-    $regkey=0;
+    $key=$nume.time().$prenume;
+    $ip = $_SERVER['REMOTE_ADDR'];
     $options = [
         'cost' => 12,
     ];
-    #todo generete regkey cum asta e o intrebare buna
+    $verifykey=hash('sha256',$key);
     $hashedpsw=password_hash($password,PASSWORD_BCRYPT, $options);
-    mysqli_stmt_bind_param($stmt, "ssssss", $nume, $prenume, $email, $hashedpsw, $verified, $regkey);
+    mysqli_stmt_bind_param($stmt, "sssssss", $nume, $prenume, $email, $hashedpsw, $verified, $verifykey,$ip);
     mysqli_stmt_execute($stmt);
-    echo"nu";
+
+    $to=$email;
+    $subject ="Email Verification";
+    $message ="<a href='http://localhost/bvolunteer/account/verify.php?verifykey=$verifykey'>Verify your account</a>";
+    $header = "From: cloudgreen2020@gmail.com \r\n";
+    $header .= "MIME-Version: 1.0"."\r\n";
+    $header .= "Content-type:text/html;charset=UTF-8"."\r\n";
+
+    mail($to,$subject,$message,$header);
 
 }

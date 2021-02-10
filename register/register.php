@@ -9,14 +9,15 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
             $(document).ready(function(){
-                $("volunteerreg").submit(function(event){
+                $("form").submit(function(event){
                     event.preventDefault();
-                    var nume=$("nume").val();
-                    var prenume=$("prenume").val();
-                    var email=$("email").val();
-                    var password=$("password").val();
-                    var confirmpassword=$("confirmpassword").val();
-                    $(".response").load("preregister.php",{
+                    var nume=$("#renume").val();
+                    var prenume=$("#reprenume").val();
+                    var email=$("#reemail").val();
+                    var password=$("#repassword").val();
+                    var confirmpassword=$("#reconfirmpassword").val();
+                    var submit=$("#resubmit").val();
+                    $(".response").load("preregister.php", {
                         nume:nume,
                         prenume:prenume,
                         email:email,
@@ -33,19 +34,19 @@
             
             <div class="user">
                 <h3>Registering as a volunteer</h3>
-                <form action="preregister.php" method="POST" id="volunteerreg">
+                <form action="preregister.php" method="POST">
                 Nume 
-                <input type="text" id="nume" name="nume" placeholder="nume" require>
+                <input type="text" id="renume" name="nume" placeholder="nume" require>
                 Prenume 
-                <input type="text" id="prenume" name="prenume" placeholder="prenume" require>
+                <input type="text" id="reprenume" name="prenume" placeholder="prenume" require>
                 Email
-                <input type="email" id="email" name="email" placeholder="your@email.com" require>
+                <input type="email" id="reemail" name="email" placeholder="your@email.com" require>
                 Password
-                <input type="password" id="password" name="password" placeholder="your password" require>
+                <input type="password" id="repassword" name="password" placeholder="your password" require>
                 Repeat password
-                <input type="password" id="confirmpassword" name="confirmpassword" placeholder="your password" require>
-                <input type="submit" id="submit" name="submit" value="Register">
-                <p id="response"></p>
+                <input type="password" id="reconfirmpassword" name="confirmpassword" placeholder="your password" require>
+                <button type="submit" id="resubmit" name="submit" Register>Register</button>
+                <p class="response"></p>
                 </form>
             </div>
             <div class="org">

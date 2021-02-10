@@ -11,160 +11,145 @@ if (isset($_POST['submit'])){
     $password=$_POST['password'];
     $confirmpassword=$_POST['confirmpassword'];
 
-    $empty_nume=0;
-    $invalid_nume=0;
-    $empty_prenume=0;
-    $invalid_prenume=0;
-    $empty_email=0;
-    $invalid_email=0;
-    $email_exist=0;
-    $critical_error=0;
-    $empty_password=0;
-    $nrcha_password=0;
-    $number_password=0;
-    $capital_password=0;
-    $lowercase_password=0;
-    $special_password=0;
-    $empty_confirmpassword=0;
-    $passworddiff=0;
+    $error=false;
+    $empty_nume= false;
+    $invalid_nume= false;
+    $empty_prenume= false;
+    $invalid_prenume= false;
+    $empty_email= false;
+    $invalid_email= false;
+    $email_exist= false;
+    $empty_password= false;
+    $nrcha_password= false;
+    $number_password= false;
+    $capital_password= false;
+    $lowercase_password= false;
+    $special_password= false;
+    $empty_confirmpassword= false;
+    $passworddiff= false;
 
     if(empty($nume)){
-        $empty_nume=1;
+        $error=true; $empty_nume=true;
+        echo "test";
     }
-    if(validnume($nume)){
-        $invalid_nume=1;
+    elseif(validnume($nume)){
+        $error=true; $invalid_nume=true;
+        echo "test2";
     }
     if(empty($prenume)){
-        $empty_prenume=1;
+        $error=true; $empty_prenume=true;
+        echo "test3";
     }
-    if(validprenume($prenume)){
-        $invalid_prenume=1;
+    elseif(validprenume($prenume)){
+        $error=true; $invalid_prenume=true;
     }
     if(empty($email)){
-        $empty_email=1;
+        $error=true; $empty_email=true;      
     }
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-        $invalid_email=1;
+    elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        $error=true; $invalid_email=true; 
     }
-    if(emailexist($conn, $email)==1){
-        $critical_error=1;
-    }
-    if(emailexist($conn, $email)==2){
-        $email_exist=1;
+    elseif(emailexist($conn, $email)==1){
+        $error=true; $email_exist=true;
     }
     if(empty($password)){
-        $empty_password=1;
+        $error=true; $empty_password=true;     
     }
     if(validpassword($password)==1){
-        $nrcha_password=1;
+        $error=true; $nrcha_password=true;       
     }
     if(validpassword($password)==2){
-        $number_password=1;
+        $error=true; $number_password=true;
     }
     if(validpassword($password)==3){
-        $lowercase_password=1;
+        $error=true; $lowercase_password=true;
     }
     if(validpassword($password)==4){
-        $capital_password=1;
+        $error=true; $capital_password=true;
     }
     if(validpassword($password)==5){
-       $special_password=1;
-    }
+        $error=true; $special_password=true;
+    } 
     if(empty($confirmpassword)){
-        $empty_confirmpassword=1;
+        $error=true; $empty_confirmpassword= true;
     }
     if($password !==$confirmpassword){
-        $passworddiff=1;
-    }
-    #todo sterse dupa teste si implementate mai sus
-    $error=false;
-    if($empty_nume==1){
-        $error=true;
-        #html+css
-        echo"1";
-    }
-    if($invalid_nume==1){
-        $error=true;
-        #html+css
-        echo"2";
-    }
-    if($empty_prenume==1){
-        $error=true;
-        #html+css
-        echo"3";
-    }
-    if($invalid_prenume==1){
-        $error=true;
-        #html+css
-        echo"4";
-    }
-    if($empty_email==1){
-        $error=true;
-        #html+css
-        echo"5";
-    }
-    if($critical_error==1){
-        $error=true;
-        #html+css
-        echo"6";
-    }
-    if($email_exist==1){
-        $error=true;
-        #html+css
-        echo"7";
-    }
-    if($invalid_email==1){
-        $error=true;
-        #html+css
-        echo"8";
-    }
-    if($empty_password==1){
-        $error=true;
-       #html+css
-       echo"9";
-    }
-    if($empty_confirmpassword==1){
-        $error=true;
-        #html+css
-        echo"10";
-    }
-    if($nrcha_password==1){
-        $error=true;
-        #html+css
-        echo"11";
-    }
-    if($number_password==1){
-        $error=true;
-        #html+css
-        echo"12";
-    }
-    if($capital_password==1){
-        $error=true;
-        #html+css
-        echo"13";
-    }
-    if($lowercase_password==1){
-        $error=true;
-        #html+css
-        echo"14";
-    }
-    if($special_password==1){
-        $error=true;
-        #html+css
-        echo"15";
-    }
-    if($passworddiff==1){
-        $error=true;
-        #html+css
-        echo"16";
+        $error=true; $passworddiff=true;
+        echo "parola";
     }
     #execute actual code
     if($error==false){
         register($conn, $nume, $prenume, $email, $password);
-        #html+css
-        echo "nu";
     }
+    
 }
-#<script>
-#ajax
-#</script>
+else {
+    header("Location: register.php");
+}
+?>
+<script>
+    var emptyNume="<?php echo $empty_nume; ?>";
+    var invalidNume="<?php echo $invalid_nume; ?>";
+    var emptyPrenume="<?php echo $empty_prenume; ?>";
+    var invalidPrenume="<?php echo $invalid_prenume; ?>";
+    var emptyEmail="<?php echo $empty_email; ?>";
+    var invalidEmail="<?php echo $invalid_email; ?>";
+    var existEmail="<?php echo $email_exist; ?>";
+    var emptyPassword="<?php echo $empty_password; ?>";
+    var emptyConfirmPassword="<?php echo $empty_confirmpassword; ?>";
+    var nrchaPassword="<?php echo $nrcha_password; ?>";
+    var numberPassword="<?php echo $number_password; ?>";
+    var capitalPassword="<?php echo $capital_password; ?>";
+    var lowecasePassword="<?php echo $lowercase_password; ?>";
+    var specialPassword="<?php echo $special_password; ?>";
+    var diffPassword="<?php echo $passworddiff; ?>";
+    var error=false;
+    if(emptyNume == true){
+        error=true;
+    }
+    else if(invalidNume==true){
+        error=true;
+    }
+    if(emptyPrenume==true){
+        error=true;
+    }
+    if(emptyPrenume==false && invalidPrenume==true){
+        error=true;
+    }
+    if(emptyEmail==true){
+        error=true;
+    }
+    if(emptyEmail==false && invalidEmail==true){
+        error=true;
+    }
+    if(emptyEmail==false && invalidEmail==false && existEmail==true){
+        error=true;
+    }
+    if(emptyPassword==true){
+        error=true;
+    }
+    if(emptyPassword==false && nrchaPassword==true){
+        error=true;
+    }
+    if(emptyPassword==false && numberPassword==true){
+        error=true;
+    }
+    if(emptyPassword==false && capitalPassword==true){
+        error=true;
+    }
+    if(emptyPassword==false && lowecasePassword==true){
+        error=true;
+    }
+    if(emptyPassword==false && specialPassword==true){
+        error=true;
+    }
+    if(emptyConfirmPassword==true){
+        error=true;
+    }
+    if(emptyPassword==false && emptyConfirmPassword==false && diffPassword==true){
+        error=true;
+    }
+    if(error==false){
+        
+    }
+</script>
