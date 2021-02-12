@@ -42,15 +42,19 @@ if (isset($_POST['submit'])){
     }
     elseif(validprenume($prenume)){
         $error=true; $invalid_prenume=true;
+        echo "test4";
     }
     if(empty($email)){
         $error=true; $empty_email=true;      
+        echo "test5";
     }
     elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $error=true; $invalid_email=true; 
+        echo "test6";
     }
     elseif(emailexist($conn, $email)==1){
         $error=true; $email_exist=true;
+        echo "test7";
     }
     if(empty($password)){
         $error=true; $empty_password=true;     
@@ -75,11 +79,11 @@ if (isset($_POST['submit'])){
     }
     if($password !==$confirmpassword){
         $error=true; $passworddiff=true;
-        echo "parola";
+        echo "test10";
     }
     #execute actual code
     if($error==false){
-        register($conn, $nume, $prenume, $email, $password);
+        registeruser($conn, $nume, $prenume, $email, $password);
     }
     
 }
@@ -107,46 +111,46 @@ else {
     if(emptyNume == true){
         error=true;
     }
-    else if(invalidNume==true){
+    if(invalidNume==true){
         error=true;
     }
     if(emptyPrenume==true){
         error=true;
     }
-    if(emptyPrenume==false && invalidPrenume==true){
+    if(invalidPrenume==true){
         error=true;
     }
     if(emptyEmail==true){
         error=true;
     }
-    if(emptyEmail==false && invalidEmail==true){
+    if(invalidEmail==true){
         error=true;
     }
-    if(emptyEmail==false && invalidEmail==false && existEmail==true){
+    if(existEmail==true){
         error=true;
     }
     if(emptyPassword==true){
         error=true;
     }
-    if(emptyPassword==false && nrchaPassword==true){
+    if(nrchaPassword==true){
         error=true;
     }
-    if(emptyPassword==false && numberPassword==true){
+    if(numberPassword==true){
         error=true;
     }
-    if(emptyPassword==false && capitalPassword==true){
+    if(capitalPassword==true){
         error=true;
     }
-    if(emptyPassword==false && lowecasePassword==true){
+    if(lowecasePassword==true){
         error=true;
     }
-    if(emptyPassword==false && specialPassword==true){
+    if(specialPassword==true){
         error=true;
     }
     if(emptyConfirmPassword==true){
         error=true;
     }
-    if(emptyPassword==false && emptyConfirmPassword==false && diffPassword==true){
+    if(diffPassword==true){
         error=true;
     }
     if(error==false){

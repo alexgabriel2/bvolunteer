@@ -42,25 +42,34 @@ function emailexist($conn, $email){
     }
     mysqli_stmt_close($stmt);
 }
-function register($conn, $nume, $prenume, $email, $password){
+function registeruser($conn, $nume, $prenume, $email, $password){
 
-    $sql = "INSERT INTO users (nume, prenume, email, password, verified, regkey, ipreg)
-     VALUE (?, ?, ?, ?, ?, ?, ?);";
+    $sql = "INSERT INTO users (nume, prenume, email, password, verified, regkey, ipreg) VALUE (?, ?, ?, ?, ?, ?, ?);";
+    $sqluser = "INSERT INTO logusr (email, password, user) VALUE (?, ?, ?);";
+
     $stmt = mysqli_stmt_init($conn);
+    $stmt2 = mysqli_stmt_init($conn);
+
     mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_prepare($stmt2, $sqluser);
 
     $verified=0;
     $key=$nume.time().$prenume;
-
+    $user=true;
     $ip = $_SERVER['REMOTE_ADDR'];
-    
     $options = [
         'cost' => 12,
     ];
+
     $verifykey=hash('sha256',$key);
     $hashedpsw=password_hash($password,PASSWORD_BCRYPT, $options);
+
     mysqli_stmt_bind_param($stmt, "sssssss", $nume, $prenume, $email, $hashedpsw, $verified, $verifykey, $ip);
+    mysqli_stmt_bind_param($stmt2, "sss", $email, $hashedpsw, $user);
+
     mysqli_stmt_execute($stmt);
+    mysqli_stmt_execute($stmt2);
+
     $usr="volutar";
     $to=$email;
     $subject ="Email Verification";
@@ -70,5 +79,8 @@ function register($conn, $nume, $prenume, $email, $password){
     $header .= "Content-type:text/html;charset=UTF-8"."\r\n";
 
     mail($to,$subject,$message,$header);
+
+    mysqli_stmt_close($stmt);
+    mysqli_stmt_close($stmt2);
 
 }

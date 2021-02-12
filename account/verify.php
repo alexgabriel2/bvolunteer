@@ -9,7 +9,7 @@ if(isset($_GET['verifykey']) && isset($_GET['is'])){
 
     if($user=="volutar"){
 
-        $sqlusers="SELECT * FROM users WHERE verified=? AND regkey=?;";
+        $sqlusers="SELECT verified,regkey FROM users WHERE verified=? AND regkey=?;";
         $stmt=mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt,$sqlusers);
         $verified=0;
@@ -20,6 +20,31 @@ if(isset($_GET['verifykey']) && isset($_GET['is'])){
             $update=$conn->query("UPDATE USERS SET verified = 1 WHERE regkey='$verkey' LIMIT 1");
             if($update){
                 echo "Your account has been verified";
+                mysqli_stmt_close($stmt);
+            }
+            else{
+                echo"Something went wrong";
+            }
+        }
+        else{
+            echo"This account is invalid or is already verified";
+        }
+
+    }
+    elseif($user=="org"){
+
+        $sqlorg="SELECT verified,regkey FROM org WHERE verified=? AND regkey=?;";
+        $stmt=mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt,$sqlorg);
+        $verified=0;
+        mysqli_stmt_bind_param($stmt,"ss", $verified, $verkey);
+        mysqli_stmt_execute($stmt);
+        $resultorg=mysqli_stmt_get_result($stmt);
+        if(mysqli_fetch_assoc($resultorg)){
+            $update=$conn->query("UPDATE ORG SET verified = 1 WHERE regkey='$verkey' LIMIT 1");
+            if($update){
+                echo "Your account has been verified";
+                mysqli_stmt_close($stmt);
             }
             else{
                 echo"Something went wrong";
@@ -33,5 +58,4 @@ if(isset($_GET['verifykey']) && isset($_GET['is'])){
     else{
         echo"Something went wrong";
     }
-    mysqli_stmt_close($stmt);
 }
