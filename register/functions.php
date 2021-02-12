@@ -37,7 +37,7 @@ function emailexist($conn, $email){
     mysqli_stmt_execute($stmt);
     $resultuser=mysqli_stmt_get_result($stmt);
     if(mysqli_fetch_assoc($resultuser)){
-        return "2";
+        return "1";
         #exista
     }
     mysqli_stmt_close($stmt);
@@ -85,5 +85,27 @@ function registeruser($conn, $nume, $prenume, $email, $password){
 
 }
 function login($conn,$email,$password){
-    
+
+    $sqllogin="SELECT email,password FROM logusr WHERE email=?;";
+
+    $stmt=mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt,$sqllogin);
+
+    mysqli_stmt_bind_param($stmt,"s",$email);
+    mysqli_stmt_execute($stmt);
+    $result=mysqli_stmt_get_result($stmt);
+    $fetreuslt=mysqli_fetch_assoc($result);
+    if($fetreuslt){
+       $hash=$fetreuslt['password'];
+       if(password_verify($password,$hash)){
+            return "1";
+       }
+       else{
+           return "2";
+       }
+    }
+    else{
+        return "2";
+   }
+    mysqli_stmt_close($stmt);
 }

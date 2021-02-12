@@ -30,31 +30,24 @@ if (isset($_POST['submit'])){
 
     if(empty($nume)){
         $error=true; $empty_nume=true;
-        echo "test";
     }
     elseif(validnume($nume)){
         $error=true; $invalid_nume=true;
-        echo "test2";
     }
     if(empty($prenume)){
         $error=true; $empty_prenume=true;
-        echo "test3";
     }
     elseif(validprenume($prenume)){
         $error=true; $invalid_prenume=true;
-        echo "test4";
     }
     if(empty($email)){
         $error=true; $empty_email=true;      
-        echo "test5";
     }
     elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $error=true; $invalid_email=true; 
-        echo "test6";
     }
     elseif(emailexist($conn, $email)==1){
         $error=true; $email_exist=true;
-        echo "test7";
     }
     if(empty($password)){
         $error=true; $empty_password=true;     
@@ -79,7 +72,6 @@ if (isset($_POST['submit'])){
     }
     if($password !==$confirmpassword){
         $error=true; $passworddiff=true;
-        echo "test10";
     }
     #execute actual code
     if($error==false){

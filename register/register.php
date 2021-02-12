@@ -9,6 +9,27 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
+    <script>
+            $(document).ready(function(){
+                $("form").submit(function(event){
+                    event.preventDefault();
+                    var nume=$("#renume").val();
+                    var prenume=$("#reprenume").val();
+                    var email=$("#reemail").val();
+                    var password=$("#repassword").val();
+                    var confirmpassword=$("#reconfirmpassword").val();
+                    var submit=$("#resubmit").val();
+                    $(".response").load("preregisteruser.php", {
+                        nume:nume,
+                        prenume:prenume,
+                        email:email,
+                        password:password,
+                        confirmpassword:confirmpassword,
+                        submit:submit
+                    });
+                });
+            });
+        </script>
         <div class = up_part>
             <div class = left_side>
 
@@ -41,26 +62,5 @@
             <div class="org">
             </div>
         </div>
-        <script>
-            $(document).ready(function(){
-                $("form").submit(function(event){
-                    event.preventDefault();
-                    var nume=$("#renume").val();
-                    var prenume=$("#reprenume").val();
-                    var email=$("#reemail").val();
-                    var password=$("#repassword").val();
-                    var confirmpassword=$("#reconfirmpassword").val();
-                    var submit=$("#resubmit").val();
-                    $(".response").load("preregisteruser.php", {
-                        nume:nume,
-                        prenume:prenume,
-                        email:email,
-                        password:password,
-                        confirmpassword:confirmpassword,
-                        submit:submit
-                    });
-                });
-            });
-        </script>
     </body>
 </html>

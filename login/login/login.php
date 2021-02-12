@@ -1,11 +1,12 @@
 <?php 
-require_once '../dependencies/db_connect.php';
-require_once '../dependencies/functions.php';
+
+require_once '../../register/functions.php';
+require_once '../../dependencies/db_connect.php';
 
 if(isset($_POST['submit'])){
 
     $email=$_POST['email'];
-    $password=$_post['password'];
+    $password=$_POST['password'];
 
     $error=false;
     $emptyemail=false;
@@ -22,6 +23,11 @@ if(isset($_POST['submit'])){
         $error=true;$emptypassword=true;
     }
     if($error==false){
-        login($conn,$email,$password);
+        if(login($conn,$email,$password)==1){
+
+        }
+        if(login($conn,$email,$password)==2){
+            
+        }
     }
 }
