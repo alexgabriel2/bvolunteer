@@ -9,6 +9,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
+<<<<<<< HEAD
     <script>
             $(document).ready(function(){
                 $("form").submit(function(event){
@@ -34,12 +35,18 @@
             <div class = left_side>
 
             
+=======
+        <div id="content">
+            <div id="left">
+                <div> aici bag pulan mata </div>
+>>>>>>> f467a7b09e7712c1d2abbb979d8e7ad96c6dc110
             </div>
-            <div class = right_side>
 
-
+            <div id="right">
+                <div> aici mil sugi </div>
             </div>
         </div>
+        <!--
         <div class="register">
             
             <div class="user">
@@ -62,5 +69,30 @@
             <div class="org">
             </div>
         </div>
+<<<<<<< HEAD
+=======
+        <script>
+            $(document).ready(function(){
+                $("form").submit(function(event){
+                    event.preventDefault();
+                    var nume=$("#renume").val();
+                    var prenume=$("#reprenume").val();
+                    var email=$("#reemail").val();
+                    var password=$("#repassword").val();
+                    var confirmpassword=$("#reconfirmpassword").val();
+                    var submit=$("#resubmit").val();
+                    $(".response").load("preregisteruser.php", {
+                        nume:nume,
+                        prenume:prenume,
+                        email:email,
+                        password:password,
+                        confirmpassword:confirmpassword,
+                        submit:submit
+                    });
+                });
+            });
+        </script>
+        -->
+>>>>>>> f467a7b09e7712c1d2abbb979d8e7ad96c6dc110
     </body>
 </html>
