@@ -9,6 +9,16 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
+        <div class = up_part>
+            <div class = left_side>
+
+            
+            </div>
+            <div class = right_side>
+
+
+            </div>
+        </div>
         <div class="register">
             
             <div class="user">
