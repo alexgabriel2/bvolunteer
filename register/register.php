@@ -9,16 +9,16 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
-        <div class = up_part>
-            <div class = left_side>
-
-            
+        <div id="content">
+            <div id="left">
+                <div> aici bag pulan mata </div>
             </div>
-            <div class = right_side>
 
-
+            <div id="right">
+                <div> aici mil sugi </div>
             </div>
         </div>
+        <!--
         <div class="register">
             
             <div class="user">
@@ -62,5 +62,6 @@
                 });
             });
         </script>
+        -->
     </body>
 </html>

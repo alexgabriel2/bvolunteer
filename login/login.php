@@ -26,13 +26,29 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<div class="login100-pic js-tilt" data-tilt>
-					<img src="images/img-01.png" alt="IMG">
+				<div id="content">
+					<button class = "buton_sexy" id = "left" onclick = "change_to_vol()">
+						Voluntar
+					</button>
+					<button class = "buton_sexy" id = "right" onclick = "change_to_org()">
+						Organizatie
+					</button>
 				</div>
-
+				<script>
+					function change_to_org ()
+					{
+						document.getElementById("left").style.backgroundColor = "orange";
+						document.getElementById("right").style.backgroundColor = "green";
+					}
+					function change_to_vol ()
+					{
+						document.getElementById("left").style.backgroundColor = "green";
+						document.getElementById("right").style.backgroundColor = "orange";
+					}
+				</script>
 				<form class="login100-form validate-form" action="login/login.php" method="post">
 					<span class="login100-form-title">
-						Login
+						Register
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
@@ -50,32 +66,22 @@
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
-					
-					<div class = "text-center p-t-12"> 
-						<input type="checkbox" id="remember_me" name="remember_me">
-							<label for="vehicle1"> Remember me ! </label><br>
-					</div>
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" name="submit">
-							Login
+							Submit
 						</button>
 					</div>
 
 					<div class="text-center p-t-12">
 						<span class="txt1">
-							Forgot
+							Already have an account ?
 						</span>
 						<a class="txt2" href="#">
-							Password?
+							Log in!
 						</a>
 					</div>
 			
-					<div class="text-center p-t-136">
-						<a class="txt2" href="../register/register.php">
-							Create your Account
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</a>
 					</div>
 				</form>
 			</div>
