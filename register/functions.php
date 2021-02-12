@@ -84,3 +84,6 @@ function registeruser($conn, $nume, $prenume, $email, $password){
     mysqli_stmt_close($stmt2);
 
 }
+function login($conn,$email,$password){
+    
+}
