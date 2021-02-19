@@ -39,16 +39,18 @@
 					{
 						document.getElementById("left").style.backgroundColor = "orange";
 						document.getElementById("right").style.backgroundColor = "green";
+						document.getElementById("formular").innerHTML = '<span class="login100-form-title">Register as organization</span><div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz"><input class="input100" type="email" id="email_login" name="email" placeholder="Email" require><span class="focus-input100"></span><span class="symbol-input100"><i class="fa fa-envelope" aria-hidden="true"></i></span></div><div class="wrap-input100 validate-input" data-validate = "Password is required"><input class="input100"  type="password" id="password_login" name="password" placeholder="Password" require><span class="focus-input100"></span><span class="symbol-input100"><i class="fa fa-lock" aria-hidden="true"></i></span></div><div class="container-login100-form-btn"><button class="login100-form-btn" name="submit">Submit</button></div><div class="text-center p-t-12"><span class="txt1">Already have an account ?</span><a class="txt2" href="#">Log in!</a></div></div>';
 					}
 					function change_to_vol ()
 					{
 						document.getElementById("left").style.backgroundColor = "green";
 						document.getElementById("right").style.backgroundColor = "orange";
+						document.getElementById("formular").innerHTML = '<span class="login100-form-title">Register as Volunteer</span><div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz"><input class="input100" type="email" id="email_login" name="email" placeholder="Email" require><span class="focus-input100"></span><span class="symbol-input100"><i class="fa fa-envelope" aria-hidden="true"></i></span></div><div class="wrap-input100 validate-input" data-validate = "Password is required"><input class="input100"  type="password" id="password_login" name="password" placeholder="Password" require><span class="focus-input100"></span><span class="symbol-input100"><i class="fa fa-lock" aria-hidden="true"></i></span></div><div class="container-login100-form-btn"><button class="login100-form-btn" name="submit">Submit</button></div><div class="text-center p-t-12"><span class="txt1">Already have an account ?</span><a class="txt2" href="#">Log in!</a></div></div>';
 					}
 				</script>
-				<form class="login100-form validate-form" action="login/login.php" method="post">
+				<form class="login100-form validate-form" action="login/login.php" method="post" id = "formular">
 					<span class="login100-form-title">
-						Register
+						Register as Volunteer
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
@@ -67,11 +69,21 @@
 						</span>
 					</div>
 
+					<input class="input100"  type="date" id="password_login" name="password" placeholder="Password" require>
+						<span class="focus-input100"></span>
+
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" name="submit">
 							Submit
 						</button>
 					</div>
+					<!-- siteu 
+						bani
+						de impletat toate formurile 
+						de scos iconitele 
+						de facut switch u bine 
+						de impletat un date type bun (facebuci)
+						-->
 
 					<div class="text-center p-t-12">
 						<span class="txt1">
