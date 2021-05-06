@@ -30,31 +30,23 @@ function validpassword($password) {
 
 function emailexist($conn, $email){
 
-    $sqlusers="SELECT email FROM users WHERE email=?;";
-    $sqlorg ="SELECT email FROM org WHERE email=?;";
-
+    $sqlusers="SELECT email FROM logusr WHERE email=?;";
+    
     $stmt=mysqli_stmt_init($conn);
-    $stmt2=mysqli_stmt_init($conn);
 
     mysqli_stmt_prepare($stmt,$sqlusers);
-    mysqli_stmt_prepare($stmt2,$sqlorg);
 
     mysqli_stmt_bind_param($stmt,"s",$email);
-    mysqli_stmt_bind_param($stmt2,"s",$email);
-
+  
     mysqli_stmt_execute($stmt);
-    mysqli_stmt_execute($stmt2);
 
     $resultuser=mysqli_stmt_get_result($stmt);
-    $resultorgr=mysqli_stmt_get_result($stmt2);
 
-    if(mysqli_fetch_assoc($resultuser) || mysqli_fetch_assoc($resultorgr)){
+    if(mysqli_fetch_assoc($resultuser)){
         return "1";
-        #exista
     }
 
     mysqli_stmt_close($stmt);
-    mysqli_stmt_close($stmt2);
 
 }
 
@@ -78,6 +70,7 @@ function registeruser($conn, $nume, $prenume, $email, $password){
 	$country = $details->country;
     $city= $details->city;
     $region=$details->region;
+
     
     $options = [
         'cost' => 12,
@@ -172,10 +165,12 @@ function login($conn,$email,$password){
     if($fetreuslt){
         $hash=$fetreuslt['password'];
         if(password_verify($password,$hash)){
+            #sesiuni 
+            
             return "1";
         }
         else{
-           return "2";
+           return "3";
         }
     }
     else{

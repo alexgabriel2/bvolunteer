@@ -1,40 +1,122 @@
-body, html {
-    height: 100%;
-    margin: 0 auto;
-  }
-  
-.register{
-    width: 10%;
-    padding: 10% 0 0;
-    margin: auto;
+*{
+
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
-.up_part
-{
-    width: 100%;
-    height: 10%;
-    border: 3px solid red;
-}
-#content { 
-    overflow: auto; 
-    width: 100%; 
-    height: 10%;
-    background: gray; 
-  } 
-  
-  #left, #right { 
-    width: 44%; 
-    padding: 1em; 
-    margin-top: 2%;
+html, body {
+
     overflow: hidden;
-  } 
-  
-  #left  { 
-    float:left;
-    text-align: center;
-    border: 3px solid red;
 }
-  #right { 
-    float:right;
-    text-align: center;
-    border: 3px solid green;
-} 
+
+.page{ 
+
+	width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap :7rem;
+    padding: 0 2rem;
+	background-image: url("../../htdocs/testheader.JPG");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.logo{
+
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	
+}
+.logo img{
+	width: 800px;
+}
+
+.register{
+
+	display: flex;
+	align-items: center;
+	text-align: center;
+
+}
+.register .div{
+	background-color: white;
+	border-radius: 10px;
+	width: 55%;
+	height: 50%;
+	border: 1px solid rgba(0,0,0);
+}
+.register input[type=text],input[type=password]{
+
+	width: 60%;
+	height: 20%;
+	border-radius: 5px;
+	padding: 4px;
+	margin-top: 10px;
+ 	margin-bottom: 10px;
+ 	font-size: 14px;
+}
+.register .logbtn{
+
+	display: block;
+
+}
+.register input[type=submit]{
+	width: 60%;
+	height: 50px;
+	border-radius: 25px;
+	margin-bottom: 10px;
+	border: none;
+	outline: none; 
+	cursor:pointer;
+}
+.register .leftbutton{
+	text-align: top;
+	width: 49%;
+	padding: 14px;
+	margin-top: 5px;
+	border-radius: 5px;
+}
+.register .rightbutton{
+	text-align: top;
+	width: 49%;
+	padding: 14px;
+	margin-top: 5px;
+	border-radius: 5px;
+}
+@media screen and (max-width: 1050px){
+	.page{
+		grid-gap: 5rem;
+	}
+}
+
+@media screen and (max-width: 1000px){
+	form{
+		width: 500px;
+	}
+
+	.login h2{
+        font-size: 2.4rem;
+        margin: 8px 0;
+	}
+
+	.logo img{
+		width: 400px;
+	}
+}
+
+@media screen and (max-width: 900px){
+	.page{
+		grid-template-columns: 1fr;
+	}
+
+	.logo{
+		display: none;
+	}
+
+	.login{
+		justify-content: center;
+	}
+}

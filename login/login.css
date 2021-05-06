@@ -1,6 +1,113 @@
+*{
+
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+html, body {
+
+    overflow: hidden;
+}
+
+.page{ 
+
+	width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap :7rem;
+    padding: 0 2rem;
+	background-image: url("../../htdocs/testheader.JPG");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.logo{
+
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	
+}
+.logo img{
+	width: 800px;
+}
+
 .login{
-   
-    width: 10%;
-    padding: 10% 0 0;
-    margin: auto;
+
+	display: flex;
+	align-items: center;
+	text-align: center;
+
+}
+.login form{
+
+	background-color: white;
+	border-radius: 25px;
+	width: 45%;
+	height: 40%;
+	border: 1px solid rgba(0,0,0);
+}
+
+.login input[type=text],input[type=password]{
+
+   	width: 60%;
+   	height: 20%;
+   	border-radius: 5px;
+   	padding: 4px;
+   	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 14px;
+}
+.login .logbtn{
+
+	display: block;
+
+}
+.login input[type=submit]{
+	width: 60%;
+	height: 50px;
+	border-radius: 25px;
+	margin-bottom: 10px;
+	border: none;
+	outline: none; 
+	cursor:pointer;
+}
+.login .inputerror{
+	border: 1px solid red;
+}
+@media screen and (max-width: 1050px){
+	.page{
+		grid-gap: 5rem;
+	}
+}
+
+@media screen and (max-width: 1000px){
+	form{
+		width: 500px;
+	}
+
+	.login h2{
+        font-size: 2.4rem;
+        margin: 8px 0;
+	}
+
+	.logo img{
+		width: 400px;
+	}
+}
+
+@media screen and (max-width: 900px){
+	.page{
+		grid-template-columns: 1fr;
+	}
+
+	.logo{
+		display: none;
+	}
+
+	.login{
+		justify-content: center;
+	}
 }

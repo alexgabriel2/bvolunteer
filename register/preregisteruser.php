@@ -1,16 +1,17 @@
 <?php 
 
 require_once '../dependencies/db_connect.php';
-require_once 'functions.php';
+require_once '../dependencies/functions.php';
 
 if (isset($_POST['submit'])){
-
+    
     $nume=$_POST['nume'];
     $prenume=$_POST['prenume'];
+    $phonenumber=$_POST['number'];
     $email=$_POST['email'];
     $password=$_POST['password'];
     $confirmpassword=$_POST['confirmpassword'];
-
+  
     $error=false;
     $empty_nume= false;
     $invalid_nume= false;
@@ -30,48 +31,63 @@ if (isset($_POST['submit'])){
 
     if(empty($nume)){
         $error=true; $empty_nume=true;
+        echo("1");
     }
     elseif(validnume($nume)){
         $error=true; $invalid_nume=true;
+        echo("2");
     }
     if(empty($prenume)){
         $error=true; $empty_prenume=true;
+        echo("3");
     }
     elseif(validprenume($prenume)){
         $error=true; $invalid_prenume=true;
+        echo("4");
     }
     if(empty($email)){
         $error=true; $empty_email=true;      
+        echo("5");
     }
     elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $error=true; $invalid_email=true; 
+        echo("6");
     }
     elseif(emailexist($conn, $email)==1){
         $error=true; $email_exist=true;
+        echo("7");
     }
     if(empty($password)){
         $error=true; $empty_password=true;     
+        echo("8");
     }
     if(validpassword($password)==1){
-        $error=true; $nrcha_password=true;       
+        $error=true; $nrcha_password=true;    
+        echo("9");  
     }
     if(validpassword($password)==2){
         $error=true; $number_password=true;
+        echo("10");
     }
     if(validpassword($password)==3){
         $error=true; $lowercase_password=true;
+        echo("11");
     }
     if(validpassword($password)==4){
         $error=true; $capital_password=true;
+        echo("12");
     }
     if(validpassword($password)==5){
         $error=true; $special_password=true;
+        echo("13");
     } 
     if(empty($confirmpassword)){
         $error=true; $empty_confirmpassword= true;
+        echo("14");
     }
     if($password !==$confirmpassword){
-        $error=true; $passworddiff=true;
+        $error=true; $passworddiff=true; 
+        echo("15");
     }
     #execute actual code
     if($error==false){
