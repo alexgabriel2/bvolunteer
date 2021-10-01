@@ -74,7 +74,6 @@ if (isset($_POST['submit'])){
     if($password !==$confirmpassword){
         $error=true; $passworddiff=true;
     }
-    #execute actual code
     if($error==false){
         registerorg($conn, $nume, $prenume, $email, $password);
     }
